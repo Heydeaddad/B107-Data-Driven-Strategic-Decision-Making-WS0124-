@@ -5,11 +5,11 @@ import numpy as np
 from collections import defaultdict # for handling missing data
 
 
-df = pd.read_excel("C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx")  # file location and reading
+df = pd.read_excel("path to trimmed") 
 hashtags_map = defaultdict(list)  # default value is []
 video_hashtags = defaultdict(set)  # default value is {}
 
-# Populate the maps
+
 for index, row in df.iterrows():
     video_id = row['id']
     for i in range(2):  # we have two hashtags specified to each video
@@ -51,7 +51,7 @@ largest_cc_subgraph = G.subgraph(largest_cc)
 
 largest_cc_subgraph = G.subgraph(largest_cc).copy()
 
-# Now, let's draw the largest connected component
+# draw lcc
 plt.figure(figsize=(12, 8))
 # You can choose between different layouts, here we use the spring layout
 pos = nx.spring_layout(largest_cc_subgraph)
@@ -62,7 +62,7 @@ plt.show()
 
 pos = nx.spring_layout(G)
 
-# Draw the network
+# Draw whole
 plt.figure(figsize=(15, 15))  # Set the size of the figure
 nx.draw_networkx_nodes(G, pos, node_size=10)  # Draw the nodes
 nx.draw_networkx_edges(G, pos, alpha=0.1)  # Draw the edges
