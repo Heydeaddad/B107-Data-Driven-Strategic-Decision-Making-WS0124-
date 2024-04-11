@@ -5,11 +5,11 @@ import numpy as np
 from collections import defaultdict # for handling missing data
 
 
-df = pd.read_excel("C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx")  # file location and reading
+df = pd.read_excel("path to trimmed") 
 hashtags_map = defaultdict(list)  # default value is []
 video_hashtags = defaultdict(set)  # default value is {}
 
-# Populate the maps
+
 for index, row in df.iterrows():
     video_id = row['id']
     for i in range(2):  # we have two hashtags specified to each video
@@ -35,14 +35,13 @@ G = nx.Graph() # Create the graph
 
 G.add_edges_from(edges)
 
-# Assuming G is your NetworkX graph object
-# Calculate the average clustering coefficient of the network
+
+# clustering coefficient 
 average_clustering = nx.average_clustering(G)
 print(f"Average Clustering Coefficient: {average_clustering}")
 
-# You can also calculate the clustering coefficient for each node
-individual_clustering = nx.clustering(G)
 
 
+# density
 density = nx.density(G)
 print(f"Network Density: {density}")
