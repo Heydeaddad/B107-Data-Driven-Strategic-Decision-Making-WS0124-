@@ -5,11 +5,11 @@ import numpy as np
 from collections import defaultdict # for handling missing data
 
 
-df = pd.read_excel("C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx")  # file location and reading
+df = pd.read_excel("path to trimmed") 
 hashtags_map = defaultdict(list)  # default value is []
 video_hashtags = defaultdict(set)  # default value is {}
 
-# Populate the maps
+
 for index, row in df.iterrows():
     video_id = row['id']
     for i in range(2):  # we have two hashtags specified to each video
@@ -35,20 +35,20 @@ G = nx.Graph() # Create the graph
 
 G.add_edges_from(edges)
 
-# Calculate degree centrality
+
 degree_centrality = nx.degree_centrality(G)
-# Node with the highest degree centrality
+
 max_degree_node = max(degree_centrality, key=degree_centrality.get)
 print(f"Node with highest degree centrality: {max_degree_node}")
 
-# Calculate betweenness centrality
+
 betweenness_centrality = nx.betweenness_centrality(G)
-# Node with the highest betweenness centrality
+
 max_betweenness_node = max(betweenness_centrality, key=betweenness_centrality.get)
 print(f"Node with highest betweenness centrality: {max_betweenness_node}")
 
-# Calculate closeness centrality
+
 closeness_centrality = nx.closeness_centrality(G)
-# Node with the highest closeness centrality
+
 max_closeness_node = max(closeness_centrality, key=closeness_centrality.get)
 print(f"Node with highest closeness centrality: {max_closeness_node}")
