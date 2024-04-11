@@ -1,14 +1,15 @@
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 from collections import defaultdict # for handling missing data
 
 
-df = pd.read_excel("C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx")  # file location and reading
+df = pd.read_excel("path to trimmed") 
 hashtags_map = defaultdict(list)  # default value is []
 video_hashtags = defaultdict(set)  # default value is {}
 
-# Populate the maps
+
 for index, row in df.iterrows():
     video_id = row['id']
     for i in range(2):  # we have two hashtags specified to each video
@@ -36,7 +37,7 @@ G.add_edges_from(edges)
 
 hashtag_popularity = {hashtag: len(videos) for hashtag, videos in hashtags_map.items()}
 
-# Sort the hashtags by their popularity in descending order
+# Sort the hashtags by their popularity 
 sorted_hashtags = sorted(hashtag_popularity.items(), key=lambda x: x[1], reverse=True)
 
 # Print the top 10 most popular hashtags
