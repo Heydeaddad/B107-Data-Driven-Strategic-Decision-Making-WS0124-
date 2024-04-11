@@ -1,14 +1,15 @@
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 from collections import defaultdict # for handling missing data
 
 
-df = pd.read_excel("C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx")  # file location and reading
+df = pd.read_excel("path to trimmed") 
 hashtags_map = defaultdict(list)  # default value is []
 video_hashtags = defaultdict(set)  # default value is {}
 
-# Populate the maps
+
 for index, row in df.iterrows():
     video_id = row['id']
     for i in range(2):  # we have two hashtags specified to each video
@@ -38,33 +39,33 @@ G.add_edges_from(edges)
 
 
 
-# Properties of the original network
+# original network
 original_clustering_coefficient = 0.7967911642366363
 original_density = 0.07143362664842294
 original_average_degree = 62.36155606407323
 num_nodes = len(G.nodes())
 average_degree = int(original_average_degree / 2)  # for use in WS model where each node is connected to k nearest neighbors
 
-# Erdős-Rényi model
+# Erdős-Rényi 
 p = original_density  # probability of edge creation
 er_graph = nx.erdos_renyi_graph(n=num_nodes, p=p)
 er_clustering_coefficient = nx.average_clustering(er_graph)
 er_density = nx.density(er_graph)
 
-# Barabási-Albert model
+# Barabási-Albert 
 m = average_degree  # number of edges to attach from a new node to existing nodes
 ba_graph = nx.barabasi_albert_graph(n=num_nodes, m=m)
 ba_clustering_coefficient = nx.average_clustering(ba_graph)
 ba_density = nx.density(ba_graph)
 
-# Watts-Strogatz model
+# Watts-Strogatz 
 k = average_degree * 2  # each node is connected to k nearest neighbors in ring topology
 beta = 0.1  # probability of rewiring each edge
 ws_graph = nx.watts_strogatz_graph(n=num_nodes, k=k, p=beta)
 ws_clustering_coefficient = nx.average_clustering(ws_graph)
 ws_density = nx.density(ws_graph)
 
-# Output comparison
+
 comparison = {
     'Original': {
         'Clustering Coefficient': original_clustering_coefficient,
