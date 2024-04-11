@@ -1,15 +1,14 @@
 import pandas as pd
 
-# Ensure openpyxl is installed: pip install openpyxl
-# Ensure pyarrow is installed for future compatibility: pip install pyarrow
+
 
 try:
-    # Load the dataset
-    file_path = "C:\\Users\\Oleg\\Downloads\\dataset_free-tiktok-scraper_2022-07-27_21-44-20-266.xlsx"
+   
+    file_path = "path to the raw dataset" # loading dataset
     df = pd.read_excel(file_path)
 
-    # Specify the columns to keep
-    columns_to_keep = [
+   
+    columns_to_keep = [   # trimming
         "authorMeta/digg",
         "authorMeta/fans",
         "authorMeta/following",
@@ -17,7 +16,6 @@ try:
         "authorMeta/id",
         "authorMeta/nickName",
         "authorMeta/verified",
-        # "authorMeta/video",  # Assuming this was removed due to the previous advice
         "commentCount",
         "createTime",
         "createTimeISO",
@@ -33,13 +31,13 @@ try:
         "videoMeta/width"
     ]
 
-    # Trim the dataset
+ 
     trimmed_df = df[columns_to_keep]
 
-    # Define the full path including the filename and extension for the trimmed dataset
-    trimmed_file_path = "C:\\Users\\Oleg\\OneDrive\\Рабочий стол\\Новая папка\\trimmed_dataset.xlsx"
+    
+    trimmed_file_path = "path to trimmed datased"
 
-    # Save the trimmed dataset to the new Excel file
+   
     trimmed_df.to_excel(trimmed_file_path, index=False)
 
     print(f"Trimmed dataset saved to {trimmed_file_path}")
